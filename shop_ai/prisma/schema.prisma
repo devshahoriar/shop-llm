@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model Checkpoint {
+  id          String   @id @default(uuid())
+  threadId    String
+  checkpointId String
+  parentId    String?
+  type        String?
+  checkpoint  String   // JSON string
+  metadata    String   // JSON string
+  createdAt   DateTime @default(now())
+  
+  @@unique([threadId, checkpointId])
+  @@index([threadId])
+}
+
+model CheckpointWrite {
+  id           String   @id @default(uuid())
+  threadId     String
+  checkpointId String
+  taskId       String
+  channel      String
+  type         String
+  value        String   // JSON string
+  createdAt    DateTime @default(now())
+  
+  @@index([threadId, checkpointId])
+  @@index([threadId, taskId])
+}

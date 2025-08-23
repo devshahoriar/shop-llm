@@ -1,0 +1,30 @@
+{
+  "name": "shop_ai",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.18.2",
+    "@langchain/community": "^0.3.50",
+    "@langchain/core": "^0.3.70",
+    "@langchain/google-genai": "^0.2.16",
+    "@langchain/groq": "^0.2.3",
+    "@langchain/langgraph": "^0.4.4",
+    "@langchain/mistralai": "^0.2.1",
+    "@langchain/openai": "^0.6.9",
+    "@prisma/client": "6.14.0",
+    "dotenv": "^17.2.1",
+    "hono": "^4.9.1",
+    "socket.io": "^4.8.1",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "prisma": "^6.14.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  }
+}
