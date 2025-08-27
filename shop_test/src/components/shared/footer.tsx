@@ -31,7 +31,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="h-8 w-8 rounded-full bg-primary"></div>
-              <span className="text-xl font-bold">YupStore</span>
+              <span className="text-xl font-bold">AiShop</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Your trusted destination for premium products. We curate the best items 

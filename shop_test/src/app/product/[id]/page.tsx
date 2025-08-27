@@ -1,9 +1,13 @@
 import ProductJsonLd from "@/components/shared/ProductJsonLd";
 import { api, HydrateClient } from "@/trpc/server";
 import { ErrorBackButton, FullPage } from "./client";
-import { fetchProduct } from "@/server/services/product.services";
+import { fetchProduct, fetchProductById } from "@/server/services/product.services";
 import type { Metadata } from "next";
 import type { ResolvingMetadata } from "next";
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import { appRouter } from '@/server/api/root';
+import SuperJSON from 'superjson';
+import { headers } from 'next/headers';
 
 // Generate static params for all products
 export async function generateStaticParams() {
@@ -52,9 +56,7 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = await api.product.getById({
-    id: parseInt(id),
-  });
+  const product = await fetchProductById(Number(id));
 
   if (!product) {
     return (

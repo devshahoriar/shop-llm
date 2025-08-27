@@ -5,7 +5,10 @@ import type { ToolsResponse } from '../../types/toolsResponse.js'
 
 const createAddToCartTool = tool(
   async function (input, config) {
-    const { productId, quantity = 1 } = input as { productId: string; quantity?: number }
+    const { productId, action } = input as {
+      productId: string
+      action: 'add' | 'remove'
+    }
 
     const socketId = config?.metadata?.socketId
     console.log(socketId, 'socketId in addToCart tool')
@@ -22,27 +25,24 @@ const createAddToCartTool = tool(
 
     // Send add to cart event to client
     io.to(socketId).emit('tools', {
-      name: 'addToCart',
-      data: { 
+      name: 'cart',
+      data: {
         productId: productId,
-        quantity: quantity 
+        action: action,
       },
     } satisfies ToolsResponse)
 
-    return `Added product ${productId} to cart with quantity ${quantity}`
+    return `Product with ID ${productId} has been ${action === 'add' ? 'added to' : 'removed from'} the cart.`
   },
   {
     name: 'addToCart',
-    description: 'Add a product to the shopping cart using the product ID. Use this when user wants to add a specific product to their cart. First you need to use getContext tool to ensure the product is available on the current page.',
+    description:
+      'Add a product to the shopping cart use getContext tool to get product details before adding and Remove a product from the cart.',
     schema: z.object({
-      productId: z
-        .string()
-        .describe('The ID of the product to add to cart'),
-      quantity: z
-        .number()
-        .optional()
-        .default(1)
-        .describe('The quantity of the product to add (default: 1)'),
+      productId: z.string().describe('The ID of the product to add to cart'),
+      action: z
+        .enum(['add', 'remove'])
+        .describe('Action to perform: add or remove'),
     }),
   }
 )

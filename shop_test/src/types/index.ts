@@ -15,6 +15,6 @@ export type Message = {
 }
 
 export type ToolsResponse = {
-  name: 'theme' | 'navigate' | 'wantContext' | 'context'
+  name: 'theme' | 'navigate' | 'wantContext' | 'context' | 'cart'
   data: Record<string, any> 
 }

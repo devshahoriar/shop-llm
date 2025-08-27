@@ -42,10 +42,11 @@ const createGetContextTool = tool(
         socket.off('context', contextHandler)
 
         const { pageData, cart, theme, user } = data.data
-
+        console.log(pageData, cart, theme, user, 'context data received')
         if (pageData) {
           const cleanedHtml = cleanHtmlAttributes(pageData)
-          resolve(`Current app context (structured): ${cleanedHtml}`)
+
+          resolve(`Current app context: ${cleanedHtml}`)
         }
 
         if (cart) {

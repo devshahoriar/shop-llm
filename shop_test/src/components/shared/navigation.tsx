@@ -35,7 +35,7 @@ export function Navigation() {
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 font-black">
             Y
           </span>
-          <span className="text-xl font-bold">YupStore</span>
+          <span className="text-xl font-bold">AiShop</span>
         </Link>
 
         {/* Desktop Navigation */}

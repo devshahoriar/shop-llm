@@ -8,12 +8,7 @@ import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-const ContextType = [
-  "cart",
-  "products",
-  "user",
-  "theme",
-] as const;
+const ContextType = ["cart", "products", "user", "theme"] as const;
 type ContextTypeEnum = (typeof ContextType)[number];
 
 const getPageData = () =>
@@ -23,7 +18,7 @@ const getPageData = () =>
 
 const SendContextToAi = () => {
   const { isConnected, on, off, emit } = useSocketIo();
-  const { state } = useCart();
+
   const { theme } = useTheme();
   const { data } = useUser();
   const pathname = usePathname();
@@ -38,7 +33,7 @@ const SendContextToAi = () => {
         emit("context", {
           name: "context",
           data: {
-            cart: state,
+            cart: localStorage?.getItem("cart"),
           },
         });
         break;

@@ -181,10 +181,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
+    const savedCart = localStorage ? localStorage?.getItem("cart") : null;
     if (savedCart) {
       try {
-        const parsedCart: CartState = JSON.parse(savedCart);
+        const parsedCart: CartState = JSON?.parse(savedCart);
         // Validate the parsed cart structure
         if (
           parsedCart &&
